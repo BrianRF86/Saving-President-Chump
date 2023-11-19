@@ -45,9 +45,6 @@ int main() {
 // Defining objects
     Enemy enemy;
 
-
-   
-
 //Defining ball
  enemy.radius = 20;
     enemy.x = screenWidth/2;
@@ -78,11 +75,12 @@ unsigned numFrames = 6;
     while (!WindowShouldClose() /*WindowShouldClose returns true if esc is clicked and closes the window*/) {
 
 
-            //updates
+  //updates
 
 
     //updating update call for enemy
-    void Update(Vector2 playerPosition);
+
+ enemy.Update(playerPosition);
 
 framesCounter++;
         if (framesCounter >= (60/framesSpeed))

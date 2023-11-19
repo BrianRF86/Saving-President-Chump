@@ -8,6 +8,7 @@ float x, y;
 int speed_x, speed_y;
 int radius;
 
+void update();
 void Draw () {
 
     DrawCircle(x, y, radius, YELLOW);
