@@ -81,8 +81,9 @@ unsigned numFrames = 6;
             //updates
 
 
-     enemy.Update();
-    
+    //updating update call for enemy
+    void Update(Vector2 playerPosition);
+
 framesCounter++;
         if (framesCounter >= (60/framesSpeed))
         {
