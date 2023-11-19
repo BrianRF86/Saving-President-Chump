@@ -2,7 +2,7 @@
 #include "raymath.h"
 //Ball https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
 
-class Ball {
+class Enemy {
 public: 
 float x, y;
 int speed_x, speed_y;

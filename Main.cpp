@@ -2,7 +2,7 @@
 
 //including raymath to solve Vector2ADD error
 #include "raymath.h"
-#include "ball.h"
+#include "enemy.h"
 
 
 
@@ -23,6 +23,9 @@ bool isplayerOnGround(Vector2 *playerPosition){
     }
 
 
+//Preventing player from leaving screen copied from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
+
+
 int main() {
     // Determine the Game Window Width and Height
   // setting ground position https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
@@ -40,17 +43,17 @@ int main() {
     Texture2D background = LoadTexture("resources/street.png");
     Texture2D playertex = LoadTexture("resources/scarfy5.png");
 // Defining objects
-    Ball ball;
+    Enemy enemy;
 
 
    
 
 //Defining ball
- ball.radius = 20;
-    ball.x = screenWidth/2;
-    ball.y = screenHeight/2;
-    ball.speed_x = 7;
-    ball.speed_y = 7;
+ enemy.radius = 20;
+    enemy.x = screenWidth/2;
+    enemy.y = screenHeight/2;
+    enemy.speed_x = 7;
+    enemy.speed_y = 7;
  
 unsigned numFrames = 6;
 	int frameWidth = playertex.width / numFrames;
@@ -61,6 +64,8 @@ unsigned numFrames = 6;
     int currentFrame = 0;   
     int framesCounter = 0;
     int framesSpeed = 8;
+
+
 
  // Setting the Frames Per Second
     SetTargetFPS(60);
@@ -75,7 +80,8 @@ unsigned numFrames = 6;
 
             //updates
 
-     ball.Update();
+
+     enemy.Update();
     
 framesCounter++;
         if (framesCounter >= (60/framesSpeed))
@@ -111,6 +117,14 @@ framesCounter++;
 		} else {
 			playerVelocity.x = 0;
 		}
+
+//keeping player on screen adapated from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
+        if (playerPosition.x <0){
+            playerPosition.x = 0;
+        } else if (playerPosition.x >= screenWidth - frameRec.width){
+            playerPosition.x = screenWidth - frameRec.width;
+        }
+
 //https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
         playerPosition = Vector2Add(playerPosition, playerVelocity);
         if (isplayerOnGround(&playerPosition)){
@@ -131,7 +145,7 @@ framesCounter++;
        DrawTexturePro(background,(Rectangle){ 0.0f, 0.0f, (float)background.width, (float)background.height },
        (Rectangle){ 0.0f, 0.0f, (float)screenWidth, (float)screenHeight },(Vector2){ 0.0f, 0.0f }, 0.0f,WHITE);
 
-    ball.Draw();
+    enemy.Draw();
      DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
 
         // Here goes all the Game Logic
