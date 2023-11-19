@@ -30,8 +30,8 @@ y += speed_y;
  //Normalize the direction of the enemy
  direction = Vector2Normalize(direction);
 
- x += direction.x * speed_x;
- y += direction.y * speed_y;
+ x += direction.x * speed_x * 0.5f;
+ y += direction.y * speed_y * 0.5f;
 
 // Border collision
 
