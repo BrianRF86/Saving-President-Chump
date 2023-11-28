@@ -12,7 +12,6 @@ int speed_x, speed_y;
 int radius;
 float chasearea = 10.0f;
 float chaseMultiplier;
-
  //concept from https://www.youtube.com/watch?time_continue=2&v=vGlvTWUctTQ&embeds_referring_euri=https%3A%2F%2Fwww.google.com%2F&source_ve_path=MzY4NDIsMjg2NjY&feature=emb_logo
 //adding chase timer
 float chaseTimer = 0.0f;
@@ -77,7 +76,7 @@ chaseTimer = 0.0f;
             speed_x *= -1;
     }
 }
-
+//adding reset function https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
 void ResetEnemy()
 {
     x = GetScreenWidth()/2;
@@ -88,6 +87,9 @@ void ResetEnemy()
     int speed_choices[2] = {-1,1};
     speed_x *= speed_choices[GetRandomValue(0,1)];
     speed_y *= speed_choices[GetRandomValue(0,1)];
+
+
+
 }
 };
 

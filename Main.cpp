@@ -23,7 +23,8 @@ bool isplayerOnGround(Vector2 *playerPosition){
     }
     }
 
-
+//adding bool to allow player input to reset game https://www.youtube.com/watch?v=LGqsnM_WEK4
+bool running = true;
 
 
 //Preventing player from leaving screen copied from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
@@ -82,9 +83,6 @@ int Playerscore = 0.f;
 
   //updates
 
-//adding reset function https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
-
-
 
 
 Playerscore += GetTime();
@@ -112,16 +110,19 @@ framesCounter++;
         if (isplayerOnGround(&playerPosition) && (IsKeyDown(KEY_UP)) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT))
         {
             playerVelocity.y =-playerSpeed *4;
+            running = true;
         }
         if (IsKeyDown(KEY_RIGHT) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT)) {
 			playerVelocity.x = framesSpeed;
 			if(frameRec.width < 0) {
 				frameRec.width = -frameRec.width;
+                running = true;
 			}
         } else if (IsKeyDown(KEY_LEFT) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT)) {
 			playerVelocity.x = -framesSpeed;
 			if(frameRec.width > 0) {
 				frameRec.width = -frameRec.width;
+                running = true;
 			}
 		} else {
 			playerVelocity.x = 0;
@@ -144,15 +145,19 @@ framesCounter++;
         }
 
 
+// resetting scoreboard upon reset
+
 
         // Setup Canvas
         BeginDrawing();
-// adding player enemy collision. 
+// adding player enemy collision. //adding reset function https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
 if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
         {
             enemy.ResetEnemy();
+            Playerscore = 0.f;
+            running = false;
+            DrawText(TextFormat("Game Over, PlayerScore: %i"),2.5 * screenWidth/4 -20, 20, 80, RED);
         }
-
         // Clear canvas to a specific color to avoid flicker
         ClearBackground(RAYWHITE);
       
@@ -166,7 +171,7 @@ if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{pl
      DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
      
 //adding scoreboard update
-    DrawText(TextFormat("Score: %i" ,Playerscore), 2.5 * screenWidth/4 -20, 20, 80, WHITE);
+    DrawText(TextFormat("Score: %i" ,Playerscore), 1.75 * screenWidth/4 -20, 20, 80, WHITE);
         // Here goes all the Game Logic
 
         // teardown Canvas
