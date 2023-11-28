@@ -3,7 +3,7 @@
 //including raymath to solve Vector2ADD error
 #include "raymath.h"
 #include "enemy.h"
-
+#include "hitbox.h"
 
 
 
@@ -23,6 +23,7 @@ bool isplayerOnGround(Vector2 *playerPosition){
     }
 
 
+
 //Preventing player from leaving screen copied from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
 
 
@@ -34,7 +35,7 @@ int main() {
     const int screenHeight = 800;
     const int gravity = 1;
 
-
+Hitbox hitbox (100.0f,100.0f,20.0f);
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Scarfy's dodgeball survival");
 
@@ -133,6 +134,8 @@ framesCounter++;
         playerVelocity.y += gravity;
         }
 
+
+
         // Setup Canvas
         BeginDrawing();
         // Clear canvas to a specific color to avoid flicker
@@ -146,7 +149,7 @@ framesCounter++;
 
     enemy.Draw();
      DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
-
+    hitbox.Draw();
         // Here goes all the Game Logic
 
         // teardown Canvas

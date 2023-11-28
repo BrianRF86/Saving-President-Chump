@@ -1,7 +1,10 @@
 #include "raylib.h"
 #include "raymath.h"
-//Ball https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
+#include "hitbox.h"
 
+
+//Ball https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
+//increasing hitbox size
 class Enemy {
 public: 
 float x, y;
@@ -12,7 +15,6 @@ void update();
 void Draw () {
 
     DrawCircle(x, y, radius, YELLOW);
-
     }
 
 
@@ -30,8 +32,8 @@ y += speed_y;
  //Normalize the direction of the enemy
  direction = Vector2Normalize(direction);
 
- x += direction.x * speed_x * 0.5f;
- y += direction.y * speed_y * 0.5f;
+ x += direction.x * speed_x * 1.75f;
+ y += direction.y * speed_y * 1.75f;
 
 // Border collision
 
