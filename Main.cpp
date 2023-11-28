@@ -6,9 +6,6 @@
 
 
 
-//scoreboard https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c 
-// Scoreboard based on time playing
-float PlayerScore = GetFrameTime();
 
 
 // setting ground position https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
@@ -67,6 +64,11 @@ unsigned numFrames = 6;
     int currentFrame = 0;   
     int framesCounter = 0;
     int framesSpeed = 8;
+//scoreboard https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c 
+// Scoreboard based on time playing
+int Playerscore = 0.f;
+
+
 
 
 
@@ -84,8 +86,11 @@ unsigned numFrames = 6;
   //updates
 
 
-    //updating update call for enemy
+//adding scoreboard update
 
+Playerscore += GetTime();
+
+    //updating update call for enemy
  enemy.Update(playerPosition);
 
 framesCounter++;
@@ -154,7 +159,7 @@ framesCounter++;
 
     enemy.Draw();
      DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
-    DrawText(TextFormat("%i" ,PlayerScore), 3 * screenWidth/4 -20, 20, 80, WHITE);
+    DrawText(TextFormat("Score: %i" ,Playerscore), 2.5 * screenWidth/4 -20, 20, 80, WHITE);
         // Here goes all the Game Logic
 
         // teardown Canvas
