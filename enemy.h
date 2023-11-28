@@ -19,7 +19,10 @@ float chaseTimer = 0.0f;
 //defining chase time for 5 seconds
 float ChaseDuration = 3.0f;
 
+
+
 void update();
+
 void Draw () {
 
     DrawCircle(x, y, radius, YELLOW);
@@ -74,4 +77,17 @@ chaseTimer = 0.0f;
             speed_x *= -1;
     }
 }
+
+void ResetEnemy()
+{
+    x = GetScreenWidth()/2;
+    y = GetScreenHeight()/2;
+    chaseMultiplier = 1.0f;
+    chaseTimer = 0.0f;
+//Random direction after reset
+    int speed_choices[2] = {-1,1};
+    speed_x *= speed_choices[GetRandomValue(0,1)];
+    speed_y *= speed_choices[GetRandomValue(0,1)];
+}
 };
+

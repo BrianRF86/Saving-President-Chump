@@ -69,9 +69,6 @@ unsigned numFrames = 6;
 int Playerscore = 0.f;
 
 
-
-
-
  // Setting the Frames Per Second
     SetTargetFPS(60);
 
@@ -85,8 +82,10 @@ int Playerscore = 0.f;
 
   //updates
 
+//adding reset function https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
 
-//adding scoreboard update
+
+
 
 Playerscore += GetTime();
 
@@ -148,6 +147,12 @@ framesCounter++;
 
         // Setup Canvas
         BeginDrawing();
+// adding player enemy collision. 
+if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
+        {
+            enemy.ResetEnemy();
+        }
+
         // Clear canvas to a specific color to avoid flicker
         ClearBackground(RAYWHITE);
       
@@ -159,6 +164,8 @@ framesCounter++;
 
     enemy.Draw();
      DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
+     
+//adding scoreboard update
     DrawText(TextFormat("Score: %i" ,Playerscore), 2.5 * screenWidth/4 -20, 20, 80, WHITE);
         // Here goes all the Game Logic
 
