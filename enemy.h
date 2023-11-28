@@ -10,8 +10,8 @@ public:
 float x, y;
 int speed_x, speed_y;
 int radius;
-
-
+float chasearea = 10.0f;
+ float chaseMultiplier;
 void update();
 void Draw () {
 
@@ -31,12 +31,13 @@ y += speed_y;
  Vector2 direction = Vector2Subtract(playerPosition, (Vector2){x,y});
 
  //calculates distance between enemy to player
- float distance = Vector2Distance (playerPosition,{ x, y});
+ float distance = Vector2Distance (playerPosition,{x,y});
 
-//defining chase multiplier
- float chaseMultiplier = 1.5f;
-
-
+if (distance < chasearea)
+{
+        //defining chase multiplier
+ chaseMultiplier = 1.5f;
+}
 
  //Normalize the direction of the enemy
  direction = Vector2Normalize(direction);
@@ -54,6 +55,5 @@ y += speed_y;
     {
             speed_x *= -1;
     }
-
 }
 };
