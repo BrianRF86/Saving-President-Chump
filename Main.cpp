@@ -6,6 +6,11 @@
 
 
 
+//scoreboard https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c 
+// Scoreboard based on time playing
+float PlayerScore = GetFrameTime();
+
+
 // setting ground position https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
 const int groundYpos = 650;
 const int jumpUpFrame = 3;
@@ -20,6 +25,8 @@ bool isplayerOnGround(Vector2 *playerPosition){
     return false;   
     }
     }
+
+
 
 
 //Preventing player from leaving screen copied from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
@@ -147,7 +154,7 @@ framesCounter++;
 
     enemy.Draw();
      DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
-    
+    DrawText(TextFormat("%i" ,PlayerScore), 3 * screenWidth/4 -20, 20, 80, WHITE);
         // Here goes all the Game Logic
 
         // teardown Canvas
