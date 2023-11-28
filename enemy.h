@@ -12,6 +12,13 @@ int speed_x, speed_y;
 int radius;
 float chasearea = 10.0f;
  float chaseMultiplier;
+
+ //concept from https://www.youtube.com/watch?time_continue=2&v=vGlvTWUctTQ&embeds_referring_euri=https%3A%2F%2Fwww.google.com%2F&source_ve_path=MzY4NDIsMjg2NjY&feature=emb_logo
+//adding chase timer
+float chaseTimer = 0.0f;
+//defining chase time for 5 seconds
+float ChaseDuration = 5.0f;
+
 void update();
 void Draw () {
 
@@ -37,6 +44,14 @@ if (distance < chasearea)
 {
         //defining chase multiplier
  chaseMultiplier = 1.5f;
+}
+
+chaseTimer += GetFrameTime();
+
+if(chaseTimer >= ChaseDuration){
+
+chaseTimer = 0.0f;
+
 }
 
  //Normalize the direction of the enemy
