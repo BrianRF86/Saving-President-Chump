@@ -17,7 +17,8 @@ float chaseMultiplier;
 float chaseTimer = 0.0f;
 //defining chase time for 5 seconds
 float ChaseDuration = 3.0f;
-
+//adding bool to allow player input to reset game https://www.youtube.com/watch?v=LGqsnM_WEK4
+bool running = true;
 
 
 void update();
@@ -87,8 +88,6 @@ void ResetEnemy()
     int speed_choices[2] = {-1,1};
     speed_x *= speed_choices[GetRandomValue(0,1)];
     speed_y *= speed_choices[GetRandomValue(0,1)];
-
-
 
 }
 };

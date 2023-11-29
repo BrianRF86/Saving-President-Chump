@@ -7,7 +7,6 @@
 
 
 
-
 // setting ground position https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
 const int groundYpos = 650;
 const int jumpUpFrame = 3;
@@ -24,7 +23,7 @@ bool isplayerOnGround(Vector2 *playerPosition){
     }
 
 //adding bool to allow player input to reset game https://www.youtube.com/watch?v=LGqsnM_WEK4
-bool running = true;
+bool running = false;
 
 
 //Preventing player from leaving screen copied from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
@@ -38,6 +37,10 @@ int main() {
     const int screenHeight = 800;
     const int gravity = 1;
 
+InitAudioDevice ();
+//Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6462">Pixabay</a>
+Sound Jump = loadSound("resources/jump.mp3");
+Sound GameM = LoadSound("resources/gamem.mp3");
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Scarfy's dodgeball survival");
@@ -84,12 +87,12 @@ int Playerscore = 0.f;
   //updates
 
 
-
 Playerscore += GetTime();
 
     //updating update call for enemy
- enemy.Update(playerPosition);
-
+ if (!running){
+    enemy.Update(playerPosition);
+ }
 framesCounter++;
         if (framesCounter >= (60/framesSpeed))
         {
@@ -110,19 +113,19 @@ framesCounter++;
         if (isplayerOnGround(&playerPosition) && (IsKeyDown(KEY_UP)) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT))
         {
             playerVelocity.y =-playerSpeed *4;
-            running = true;
+          
         }
         if (IsKeyDown(KEY_RIGHT) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT)) {
 			playerVelocity.x = framesSpeed;
 			if(frameRec.width < 0) {
 				frameRec.width = -frameRec.width;
-                running = true;
+                
 			}
         } else if (IsKeyDown(KEY_LEFT) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_LEFT)) {
 			playerVelocity.x = -framesSpeed;
 			if(frameRec.width > 0) {
 				frameRec.width = -frameRec.width;
-                running = true;
+                
 			}
 		} else {
 			playerVelocity.x = 0;
@@ -151,13 +154,18 @@ framesCounter++;
         // Setup Canvas
         BeginDrawing();
 // adding player enemy collision. //adding reset function https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
-if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
+
+    
+    if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
         {
+            running = false;            
+            DrawText(TextFormat("Game Over, PlayerScore: %i"), 2.5 * screenWidth / 4 - 20, 20, 80, RED);
+            DrawText(TextFormat("Press any button to start again"), 2.5 * screenWidth / 4 - 20, 80, 80, BLUE);
+            Playerscore = 0;
             enemy.ResetEnemy();
-            Playerscore = 0.f;
-            running = false;
-            DrawText(TextFormat("Game Over, PlayerScore: %i"),2.5 * screenWidth/4 -20, 20, 80, RED);
         }
+
+
         // Clear canvas to a specific color to avoid flicker
         ClearBackground(RAYWHITE);
       
