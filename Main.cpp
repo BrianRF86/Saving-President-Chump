@@ -159,8 +159,7 @@ framesCounter++;
     if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
         {
             running = false;            
-            DrawText(TextFormat("Game Over, PlayerScore: %i"), 2.5 * screenWidth / 4 - 20, 20, 80, RED);
-            DrawText(TextFormat("Press any button to start again"), 2.5 * screenWidth / 4 - 20, 80, 80, BLUE);
+           
             Playerscore = 0;
             enemy.ResetEnemy();
         }
@@ -178,6 +177,11 @@ framesCounter++;
     enemy.Draw();
      DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
      
+if(running == false){
+     DrawText(TextFormat("Game Over, PlayerScore: %i"), 2.5 * screenWidth / 4 - 20, 20, 80, RED);
+    DrawText(TextFormat("Press any button to start again"), 2.5 * screenWidth / 4 - 20, 80, 80, BLUE);
+}
+
 //adding scoreboard update
     DrawText(TextFormat("Score: %i" ,Playerscore), 1.75 * screenWidth/4 -20, 20, 80, WHITE);
         // Here goes all the Game Logic

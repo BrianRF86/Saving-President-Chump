@@ -1,7 +1,13 @@
 #include "raylib.h"
+#ifndef PLAYER_H
+#define PLAYER_H
 //adding player class to clean up code 
 class Player {
 public:
+
+//adding constructor https://www.geeksforgeeks.org/constructors-c/
+
+Player();
 
 // setting ground position https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
 const int groundYpos = 650;
@@ -22,5 +28,7 @@ private:
     int currentFrame;
     int framesCounter;
     int framesSpeed;
-    bool isOnGround();
+    bool isOnGround() const;
 };
+//adding to resolve error
+#endif

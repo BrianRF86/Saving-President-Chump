@@ -1,24 +1,23 @@
 #include "player.h"
 //adding .cpp for player to tidy up and make code more manageable
-void update();
 
-void Draw();
-    
+// using class member access operator https://www.tutorialspoint.com/cplusplus/class_member_access_operator_overloading.htm to fix errors definition errors.
 
-Vector2 Player.GetPosition() const {
+Player::Player() : position({0.0f, 0.0f}), velocity({0.0f, 0.0f}), speed(5), currentFrame(0), framesCounter(0), framesSpeed(8) {}
+
+Vector2 Player::GetPosition() const {
     return position;
 }
-bool isplayerOnGround() {
-       if (playerPosition->y >= groundYpos){
-    return true;
-    } else {
-    return false;   
-    }
-    }
 
 
-
-bool Player::isOnGround() {
+bool Player::isOnGround() const {
     // Check if player is on the ground
     return position.y >= groundYpos;
+}
+
+void Player::Update() {
+}
+
+void Player::Draw() {
+    // Implement the draw logic here
 }
