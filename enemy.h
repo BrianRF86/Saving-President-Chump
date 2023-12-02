@@ -90,5 +90,15 @@ void ResetEnemy()
     speed_y *= speed_choices[GetRandomValue(0,1)];
 
 }
+
+    if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
+        {
+            running = false;            
+           
+            Playerscore = 0;
+            enemy.ResetEnemy();
+        }
+
+
 };
 

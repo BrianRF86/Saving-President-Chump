@@ -3,23 +3,9 @@
 //including raymath to solve Vector2ADD error
 #include "raymath.h"
 #include "enemy.h"
+#include "player.cpp"
 
 
-
-
-const int groundYpos = 650;
-const int jumpUpFrame = 3;
-const int jumpDownFrame = 4;
-const int footstepFrame1 = 1;
-const int footstepFrame2 = 4;
-// Ground boolean https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
-bool isplayerOnGround(Vector2 *playerPosition){
-   if (playerPosition->y >= groundYpos){
-    return true;
-    } else {
-    return false;   
-    }
-    }
 
 //adding bool to allow player input to reset game https://www.youtube.com/watch?v=LGqsnM_WEK4
 bool running = false;
@@ -34,7 +20,7 @@ int main() {
 
     const int screenWidth = 1280;
     const int screenHeight = 800;
-    const int gravity = 1;
+
 
 InitAudioDevice ();
 //Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6462">Pixabay</a>
@@ -51,7 +37,7 @@ Sound GameM = LoadSound("resources/gamem.mp3");
     Texture2D playertex = LoadTexture("resources/scarfy5.png");
 // Defining objects
     Enemy enemy;
-
+    Player player;
 //Defining ball
  enemy.radius = 20;
     enemy.x = screenWidth/2;
@@ -83,7 +69,7 @@ Playerscore += GetTime();
 
     //updating update call for enemy
  if (!running){
-    enemy.Update(playerPosition);
+    enemy.Update(player.playerPosition());
  }
 
 
@@ -94,14 +80,6 @@ Playerscore += GetTime();
         BeginDrawing();
 // adding player enemy collision. //adding reset function https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
 
-    
-    if(CheckCollisionCircleRec(Vector2{enemy.x, enemy.y}, enemy.radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
-        {
-            running = false;            
-           
-            Playerscore = 0;
-            enemy.ResetEnemy();
-        }
 
 
         // Clear canvas to a specific color to avoid flicker
@@ -114,7 +92,7 @@ Playerscore += GetTime();
        (Rectangle){ 0.0f, 0.0f, (float)screenWidth, (float)screenHeight },(Vector2){ 0.0f, 0.0f }, 0.0f,WHITE);
 
     enemy.Draw();
-     DrawTextureRec(playertex, frameRec, playerPosition,WHITE);
+    player.Draw();
      
 if(running == false){
      DrawText(TextFormat("Game Over, PlayerScore: %i"), 2.5 * screenWidth / 4 - 20, 20, 80, RED);
