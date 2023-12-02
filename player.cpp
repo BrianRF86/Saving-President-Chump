@@ -1,31 +1,36 @@
 #include "player.h"
+#include "raymath.h"
 //adding .cpp for player to tidy up and make code more manageable
 
 // using class member access operator https://www.tutorialspoint.com/cplusplus/class_member_access_operator_overloading.htm to fix errors definition errors.
 
-Player::Player() : 
+//definining constants
+const int screenWidth = 1280;
+const int screenHeight = 800;
 
-unsigned numFrames = 6;
-	int frameWidth = playertex.width / numFrames;
-	Rectangle frameRec = { 0.0f, 0.0f, (float)frameWidth, (float)playertex.height };
-	Vector2 playerPosition = {GetScreenWidth ()/ 2.0f, GetScreenHeight ()/ 2.0f};
-    Vector2 playerVelocity = {0.0f,0.0f};
-    int playerSpeed = 5;
-    int currentFrame = 0;   
-    int framesCounter = 0;
-    int framesSpeed = 8;
+const int gravity = 1;
+const int groundYpos = 650;
+const int jumpUpFrame = 3;
+const int jumpDownFrame = 4;
+const int footstepFrame1 = 1;
+const int footstepFrame2 = 4;
 
-Vector2 Player::GetPosition() const {
-    return position;
-}
+int numFrames = 6;
 
 
-bool Player::isOnGround() const {
-    // Check if player is on the ground
-    return position.y >= groundYpos;
-}
+//fixing declaration errors
+Player::Player() : position({GetScreenWidth()/ 2.0f, GetScreenHeight()/2.0f}),
+                playerVelocity({0.0f, 0.0f}),
+                playerSpeed(5),
+                currentFrame(0),
+                framesCounter(0),
+                framesSpeed(8),
+                //https://www.reddit.com/r/cpp_questions/comments/lmixkx/problem_with_a_narrowing_conversion/ to solve narrowing conversion error
+                frameRec{0.0f, 0.0f, static_cast<float>(GetScreenWidth() / numFrames), static_cast<float>(GetScreenHeight())} {}
+
 
 void Player::Update() {
+
 
 framesCounter++;
         if (framesCounter >= (60/framesSpeed))
@@ -44,7 +49,7 @@ framesCounter++;
         }
         // Player movement
         // Jump & checking that player is on ground prior to jump https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
-        if (isplayerOnGround(&playerPosition) && (IsKeyDown(KEY_UP)) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT))
+        if (isplayerOnGround() && (IsKeyDown(KEY_UP)) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT))
         {
             playerVelocity.y =-playerSpeed *4;
           
@@ -66,23 +71,33 @@ framesCounter++;
 		}
 
 //keeping player on screen adapated from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
-        if (playerPosition.x <0){
-            playerPosition.x = 0;
-        } else if (playerPosition.x >= screenWidth - frameRec.width){
-            playerPosition.x = screenWidth - frameRec.width;
+        if (position.x <=0){
+            position.x = 0;
+        } else if (position.x >= screenWidth - frameRec.width){
+            position.x = screenWidth - frameRec.width;
         }
 
 //https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
-        playerPosition = Vector2Add(playerPosition, playerVelocity);
-        if (isplayerOnGround(&playerPosition)){
+        position = Vector2Add(position, playerVelocity);
+
+        if (isplayerOnGround() && (position.y >= groundYpos)) {
             playerVelocity.y = 0;
-            playerPosition.y = groundYpos;
+            position.y = groundYpos;
         } else {
         playerVelocity.y += gravity;
         }
-
-
 }
+Vector2 Player::playerPosition() const {
+    return position;
+}
+
+
+bool Player::isplayerOnGround() const {
+    // Check if player is on the ground
+    return position.y >= groundYpos;
+}
+
+
 
 void Player::Draw() {
     // Implement the draw logic here

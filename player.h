@@ -15,20 +15,24 @@ const int jumpUpFrame = 3;
 const int jumpDownFrame = 4;
 const int footstepFrame1 = 1;
 const int footstepFrame2 = 4;
-
+Texture2D playertex = LoadTexture("resources/scarfy5.png");
     void Update();
     void Draw();
 
-    Vector2 GetPosition() const;
+    Vector2 playerPosition() const;
+    bool isplayerOnGround() const;
+
 
 private:
     Vector2 position;
-    Vector2 velocity;
-    int speed;
+    Vector2 playerVelocity;
+    int playerSpeed;
     int currentFrame;
     int framesCounter;
     int framesSpeed;
-    bool isOnGround() const;
+   
+    Rectangle frameRec;
+    
 };
 //adding to resolve error
 #endif
