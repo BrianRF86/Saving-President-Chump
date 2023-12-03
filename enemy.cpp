@@ -5,7 +5,7 @@
 #include "player.h"
 //following player.cpp example
 
-//setting constructor
+//setting constructor //Defining ball
 Enemy::Enemy() :
     x(GetScreenWidth() / 2),
     y(GetScreenHeight() / 2),

@@ -21,7 +21,7 @@ Texture2D playertex = LoadTexture("resources/scarfy5.png");
 
     Vector2 playerPosition() const;
     bool isplayerOnGround() const;
-
+    Rectangle frameRec;
 
 private:
     Vector2 position;
@@ -31,7 +31,7 @@ private:
     int framesCounter;
     int framesSpeed;
    
-    Rectangle frameRec;
+    
     
 };
 //adding to resolve error

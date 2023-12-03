@@ -3,17 +3,16 @@
 //including raymath to solve Vector2ADD error
 #include "raymath.h"
 #include "enemy.h"
+#include "player.h"
 #include "enemy.cpp"
 #include "player.cpp"
-#include "player.h"
+
 
 
 
 //adding bool to allow player input to reset game https://www.youtube.com/watch?v=LGqsnM_WEK4
-bool running = false;
+bool running = true;
 
-
-//Preventing player from leaving screen copied from https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
 
 
 int main() {
@@ -36,29 +35,19 @@ Sound GameM = LoadSound("resources/gamem.mp3");
 
 //https://www.youtube.com/watch?v=j0C4ox1gFxk&list=PLORJX3OiHbbMs9AFM5bzpNUychJm1raub
     Texture2D background = LoadTexture("resources/street.png");
-    Texture2D playertex = LoadTexture("resources/scarfy5.png");
+
 // Defining objects
     Enemy enemy;
     Player player;
-//Defining ball
- enemy.radius = 20;
-    enemy.x = screenWidth/2;
-    enemy.y = screenHeight/2;
-    enemy.speed_x = 7;
-    enemy.speed_y = 7;
- 
 
 //scoreboard https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c 
 // Scoreboard based on time playing
 int Playerscore = 0.f;
 
-
  // Setting the Frames Per Second
     SetTargetFPS(60);
 
 //fix animation speed https://github.com/raysan5/raylib/blob/master/examples/textures/textures_sprite_anim.c
-
-
 
     // The Game Loop
     while (!WindowShouldClose() /*WindowShouldClose returns true if esc is clicked and closes the window*/) {
@@ -70,19 +59,19 @@ int Playerscore = 0.f;
 Playerscore += GetTime();
 
     //updating update call for enemy
+    // resetting scoreboard upon reset
  if (!running){
     enemy.Update(player.playerPosition());
  }
-
-  if(CheckCollisionCircleRec(Vector2{x, y}, radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
+  if (CheckCollisionCircleRec((Vector2){enemy.x, enemy.y}, enemy.radius, (Rectangle){player.playerPosition().x, player.playerPosition().y, player.frameRec.width, player.frameRec.height}))
         {
             running = false;            
             Playerscore = 0;
-            ResetEnemy();
+            enemy.ResetEnemy();
         }
 
+ 
 
-// resetting scoreboard upon reset
 
 
         // Setup Canvas
