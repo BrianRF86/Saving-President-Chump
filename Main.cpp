@@ -3,7 +3,9 @@
 //including raymath to solve Vector2ADD error
 #include "raymath.h"
 #include "enemy.h"
+#include "enemy.cpp"
 #include "player.cpp"
+#include "player.h"
 
 
 
@@ -71,6 +73,13 @@ Playerscore += GetTime();
  if (!running){
     enemy.Update(player.playerPosition());
  }
+
+  if(CheckCollisionCircleRec(Vector2{x, y}, radius, Rectangle{playerPosition.x, playerPosition.y, frameRec.width, frameRec.height}))
+        {
+            running = false;            
+            Playerscore = 0;
+            ResetEnemy();
+        }
 
 
 // resetting scoreboard upon reset
