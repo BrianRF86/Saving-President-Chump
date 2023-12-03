@@ -19,7 +19,8 @@ int numFrames = 6;
 
 
 //fixing declaration errors
-Player::Player() : position({GetScreenWidth()/ 2.0f, GetScreenHeight()/2.0f}),
+Player::Player() : 
+                position({GetScreenWidth()/ 2.0f, GetScreenHeight()/2.0f}),
                 playerVelocity({0.0f, 0.0f}),
                 playerSpeed(5),
                 currentFrame(0),

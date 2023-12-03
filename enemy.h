@@ -37,4 +37,4 @@ void Draw ();
 void ResetEnemy();
 };
 
-#endif
+#endif // ENEMY_H

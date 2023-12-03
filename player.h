@@ -5,12 +5,7 @@
 class Player {
 
 
-private:
-  
-    int playerSpeed;
-    int currentFrame;
-    int framesCounter;
-    int framesSpeed;
+
 
 public:
 
@@ -28,14 +23,19 @@ const int jumpUpFrame = 3;
 const int jumpDownFrame = 4;
 const int footstepFrame1 = 1;
 const int footstepFrame2 = 4;
-Rectangle frameRec;
-Texture2D playertex = LoadTexture("resources/scarfy5.png");
+
 Vector2 position;
 Vector2 playerVelocity;
 
-
-
+private:
+int playerSpeed;
+int currentFrame;
+int framesCounter;
+int framesSpeed;
 public:
+Rectangle frameRec;
+Texture2D playertex = LoadTexture("resources/scarfy5.png");
+
     void Update();
     void Draw();
 
@@ -49,4 +49,4 @@ Sound Jump = LoadSound("resources/jump.mp3");
     
 };
 //adding to resolve error
-#endif
+#endif // PLAYER_H
