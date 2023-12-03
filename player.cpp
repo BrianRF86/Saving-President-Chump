@@ -1,6 +1,7 @@
-#include "player.h"
+
 #include "raylib.h"
 #include "raymath.h"
+#include "player.h"
 //adding .cpp for player to tidy up and make code more manageable
 
 // using class member access operator https://www.tutorialspoint.com/cplusplus/class_member_access_operator_overloading.htm to fix errors definition errors.
@@ -28,8 +29,8 @@ Player::Player() :
                 framesCounter(0),
                 framesSpeed(8),
                 //https://www.reddit.com/r/cpp_questions/comments/lmixkx/problem_with_a_narrowing_conversion/ to solve narrowing conversion error
-                frameRec{0.0f, 0.0f, static_cast<float>(GetScreenWidth() / numFrames), static_cast<float>(GetScreenHeight())} {}
-
+                frameRec{0.0f, 0.0f, static_cast<float>(GetScreenWidth () / 2.0f), static_cast<float>(GetScreenHeight() /2.0f)} {}
+                Texture2D playertex = LoadTexture("resources/scarfy5.png");
 
 void Player::Update() {
 
@@ -103,5 +104,5 @@ bool Player::isplayerOnGround() const {
 
 
 void Player::Draw() {
-    // Implement the draw logic here
+    DrawTextureRec(playertex, frameRec, position, WHITE);
 }

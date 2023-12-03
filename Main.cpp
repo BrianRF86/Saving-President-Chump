@@ -4,8 +4,6 @@
 #include "raymath.h"
 #include "enemy.h"
 #include "player.h"
-#include "enemy.cpp"
-#include "player.cpp"
 
 //Game audio variables:https://github.com/raysan5/raylib/blob/master/examples/audio/audio_stream_effects.c
 
@@ -67,6 +65,7 @@ Playerscore += GetTime();
     // resetting scoreboard upon reset
  if (!running){
     enemy.Update(player.playerPosition());
+    player.Update();
  }
   if (CheckCollisionCircleRec((Vector2){enemy.x, enemy.y}, enemy.radius, (Rectangle){player.playerPosition().x, player.playerPosition().y, player.frameRec.width, player.frameRec.height}))
         {
@@ -74,10 +73,6 @@ Playerscore += GetTime();
             Playerscore = 0;
             enemy.ResetEnemy();
         }
-
- 
-
-
 
         // Setup Canvas
         BeginDrawing();
@@ -97,14 +92,16 @@ Playerscore += GetTime();
     enemy.Draw();
     player.Draw();
      
-if(running == false){
-     DrawText(TextFormat("Game Over, PlayerScore: %i"), 2.5 * screenWidth / 4 - 20, 20, 80, RED);
-    DrawText(TextFormat("Press any button to start again"), 2.5 * screenWidth / 4 - 20, 80, 80, BLUE);
-}
+
 
 //adding scoreboard update
     DrawText(TextFormat("Score: %i" ,Playerscore), 1.75 * screenWidth/4 -20, 20, 80, WHITE);
         // Here goes all the Game Logic
+
+if(running == false){
+     DrawText(TextFormat("Game Over, PlayerScore: %i"), 2.5 * screenWidth / 4 - 20, 20, 80, RED);
+    DrawText(TextFormat("Press any button to start again"), 2.5 * screenWidth / 4 - 20, 80, 80, BLUE);
+}
 
         // teardown Canvas
         EndDrawing();

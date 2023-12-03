@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ENEMY_H
 #define ENEMY_H
 
@@ -31,10 +32,11 @@ float ChaseDuration;
 //defining player Position "SEEK"
 void Update(Vector2 playerPosition);
 
-void Draw ();
 //adding reset function https://github.com/BrianRF86/Git-hub-project/commit/ae34663f72f7e8ede5a7a12281c4a4ca0339929c
-
 void ResetEnemy();
+void Draw ();
+
+
 };
 
 #endif // ENEMY_H

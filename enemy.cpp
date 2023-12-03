@@ -27,7 +27,7 @@ y += speed_y;
 // Enemy ai to chase player (testing with normal Vector2) https://stackoverflow.com/questions/28140867/getting-my-enemy-to-move-toward-my-player-c
 
  //calculates direction from enemy to player
- Vector2 direction = Vector2Subtract(playerPosition, (Vector2){x,y});
+ static Vector2 direction = Vector2Subtract(playerPosition, (Vector2){x,y});
 
  //calculates distance between enemy to player
  float distance = Vector2Distance(playerPosition,{x,y});
