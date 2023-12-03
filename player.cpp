@@ -52,6 +52,7 @@ framesCounter++;
         if (isplayerOnGround() && (IsKeyDown(KEY_UP)) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT))
         {
             playerVelocity.y =-playerSpeed *4;
+            PlaySound(Jump);
           
         }
         if (IsKeyDown(KEY_RIGHT) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT)) {

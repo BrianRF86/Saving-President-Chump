@@ -7,7 +7,15 @@
 #include "enemy.cpp"
 #include "player.cpp"
 
+//Game audio variables:
 
+static float *delayBuffer = 0;
+static unsigned int delayBufferSize = 0;
+static unsigned int delayReadIndex =2;
+static unsigned int delayWriteIndex =0;
+
+static void AudioProcessEffectLPF(void *buffer, unsigned int frames);
+static void AudioProcessEffectDelay(void *buffer, unsigned int frames);
 
 
 //adding bool to allow player input to reset game https://www.youtube.com/watch?v=LGqsnM_WEK4
@@ -22,10 +30,8 @@ int main() {
     const int screenWidth = 1280;
     const int screenHeight = 800;
 
-
 InitAudioDevice ();
-//Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6462">Pixabay</a>
-Sound Jump = LoadSound("resources/jump.mp3");
+
 //Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6082">Pixabay</a>
 Sound GameM = LoadSound("resources/gamem.mp3");
 

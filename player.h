@@ -23,6 +23,10 @@ Texture2D playertex = LoadTexture("resources/scarfy5.png");
     bool isplayerOnGround() const;
     Rectangle frameRec;
 
+
+//Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6462">Pixabay</a>
+Sound Jump = LoadSound("resources/jump.mp3");
+
 private:
     Vector2 position;
     Vector2 playerVelocity;
