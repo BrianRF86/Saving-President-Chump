@@ -1,8 +1,8 @@
 
-#include "enemy.h"
+
 #include "raylib.h"
 #include "raymath.h"
-#include "player.h"
+#include "enemy.h"
 //following player.cpp example
 
 //setting constructor //Defining ball

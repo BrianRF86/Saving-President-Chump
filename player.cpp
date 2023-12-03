@@ -1,4 +1,5 @@
 #include "player.h"
+#include "raylib.h"
 #include "raymath.h"
 //adding .cpp for player to tidy up and make code more manageable
 
@@ -50,7 +51,7 @@ framesCounter++;
         }
         // Player movement
         // Jump & checking that player is on ground prior to jump https://www.youtube.com/watch?v=_JjPo8rE8a8&t=29s
-        if (isplayerOnGround() && (IsKeyDown(KEY_UP)) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT))
+        if (isplayerOnGround() && (IsKeyDown(KEY_UP) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_FACE_RIGHT)))
         {
             playerVelocity.y =-playerSpeed *4;
             PlaySound(Jump);
