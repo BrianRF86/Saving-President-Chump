@@ -3,7 +3,20 @@
 #define PLAYER_H
 //adding player class to clean up code 
 class Player {
+
+
+private:
+  
+    int playerSpeed;
+    int currentFrame;
+    int framesCounter;
+    int framesSpeed;
+
 public:
+
+   Vector2 playerPosition() const;
+    bool isplayerOnGround() const;
+    
 
 //adding constructor https://www.geeksforgeeks.org/constructors-c/
 
@@ -15,25 +28,22 @@ const int jumpUpFrame = 3;
 const int jumpDownFrame = 4;
 const int footstepFrame1 = 1;
 const int footstepFrame2 = 4;
+Rectangle frameRec;
 Texture2D playertex = LoadTexture("resources/scarfy5.png");
+Vector2 position;
+Vector2 playerVelocity;
+
+
+
+public:
     void Update();
     void Draw();
 
-    Vector2 playerPosition() const;
-    bool isplayerOnGround() const;
-    Rectangle frameRec;
-
+ 
 
 //Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6462">Pixabay</a>
 Sound Jump = LoadSound("resources/jump.mp3");
 
-private:
-    Vector2 position;
-    Vector2 playerVelocity;
-    int playerSpeed;
-    int currentFrame;
-    int framesCounter;
-    int framesSpeed;
    
     
     

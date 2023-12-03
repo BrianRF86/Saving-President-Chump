@@ -7,16 +7,10 @@
 #include "enemy.cpp"
 #include "player.cpp"
 
-//Game audio variables:
+//Game audio variables:https://github.com/raysan5/raylib/blob/master/examples/audio/audio_stream_effects.c
 
 static float *delayBuffer = 0;
 static unsigned int delayBufferSize = 0;
-static unsigned int delayReadIndex =2;
-static unsigned int delayWriteIndex =0;
-
-static void AudioProcessEffectLPF(void *buffer, unsigned int frames);
-static void AudioProcessEffectDelay(void *buffer, unsigned int frames);
-
 
 //adding bool to allow player input to reset game https://www.youtube.com/watch?v=LGqsnM_WEK4
 bool running = true;
@@ -33,7 +27,12 @@ int main() {
 InitAudioDevice ();
 
 //Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6082">Pixabay</a>
-Sound GameM = LoadSound("resources/gamem.mp3");
+Music GameM = LoadMusicStream("resources/gamem.mp3");
+
+    delayBufferSize = 48000*2;      // 1 second delay (device sampleRate*channels)
+    delayBuffer = (float *)RL_CALLOC(delayBufferSize, sizeof(float));
+
+    PlayMusicStream(GameM);
 
     // Initialize the Window
     InitWindow(screenWidth, screenHeight, "Scarfy's dodgeball survival");
